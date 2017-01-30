@@ -1,0 +1,46 @@
+#!/bin/sh
+if [[ $1 == install || update ]]; then
+
+	if [ -e /Applications/Cydia.app/zh-Hant.lproj ]; then
+		
+		cp -fr /Applications/Cydia.app/en.lproj /Applications/Cydia.app/en.lprojbk
+		echo 'backup en.lproj sucess'
+		
+		rm -rf /Applications/Cydia.app/en.lproj
+		echo 'deleted en.lproj'
+		
+		if [ -e /Applications/Cydia.app/zh-Hans.lproj ]
+		then
+			cp -fr /Applications/Cydia.app/zh-Hans.lproj /Applications/Cydia.app/zh-Hans.lprojbk
+			echo 'backup zh-Hans.lproj sucess'
+			rm -rf /Applications/Cydia.app/zh-Hans.lproj
+			echo 'deleted zh-Hans.lproj sucess'
+		fi
+
+		if [ -e /Applications/Cydia.app/zh-Hant.lproj ]
+		then
+			cp -fr /Applications/Cydia.app/zh-Hant.lproj /Applications/Cydia.app/zh-Hant.lprojbk
+			echo 'backup zh-Hant.lproj sucess'
+			
+			mv /Applications/Cydia.app/zh-Hant.lproj /Applications/Cydia.app/en.lproj
+			echo 'rename zh-Hant.lproj to en.lproj sucessfully'
+		fi
+
+
+	else
+		echo 'nothing done'
+	fi
+
+	declare -a cydia
+	cydia=($CYDIA)
+	if [[ ${CYDIA+@} ]]; then
+		if [[ ${cydia[1]} -lt 1 ]]; then
+			echo 'PLEASE RESTART CYDIA!'
+		else
+			eval "echo 'finish:restart' >&${cydia[0]}"
+		fi
+	fi
+
+exit 0
+
+fi

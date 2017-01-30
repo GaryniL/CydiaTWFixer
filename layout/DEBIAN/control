@@ -1,0 +1,12 @@
+Package: tw.garynil.CydiaTWFixer
+Name: CydiaTWFixer
+Architecture: iphoneos-arm
+Description: A tweak fix Cydia loading slowly in language of zh-Hant
+Homepage: 
+Depiction: 
+Author: Gary niL
+Section: Tweaks
+Depends: 
+Conflicts: 
+Version: 1.0.0
+Maintainer: Gary Lin <garynil1635@gmail.com>

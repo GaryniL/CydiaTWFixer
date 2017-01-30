@@ -1,0 +1,55 @@
+#!/bin/sh
+if [[ $1 == remove ]]; then
+
+	if [ -e /Applications/Cydia.app/en.lprojbk ]; then
+		
+		if [ -e /Applications/Cydia.app/en.lproj ]; then
+			rm -rf /Applications/Cydia.app/en.lproj
+			echo 'delete editted en.lproj'
+		fi
+
+		mv /Applications/Cydia.app/en.lprojbk /Applications/Cydia.app/en.lproj
+
+		if [ -e /Applications/Cydia.app/en.lprojbk ]; then
+			rm -rf /Applications/Cydia.app/zen.lprojbk
+		fi
+		echo 'restored en.lproj'
+
+		if ！ [ -e /Applications/Cydia.app/zh-Hans.lproj ]; then
+			mv /Applications/Cydia.app/zh-Hans.lprojbk /Applications/Cydia.app/zh-Hans.lproj
+			rm -rf /Applications/Cydia.app/zh-Hans.lprojbk
+			echo 'restored zh-Hans.lproj'
+		fi
+
+		if [ -e /Applications/Cydia.app/zh-Hans.lprojbk ]; then
+			rm -rf /Applications/Cydia.app/zh-Hans.lprojbk
+		fi
+
+		if ！ [ -e /Applications/Cydia.app/zh-Hant.lproj ]; then
+			mv /Applications/Cydia.app/zh-Hant.lprojbk /Applications/Cydia.app/zh-Hant.lproj
+			rm -rf /Applications/Cydia.app/zh-Hant.lprojbk
+			echo 'restored zh-Hant.lproj'
+		fi
+
+		if [ -e /Applications/Cydia.app/zh-Hant.lprojbk ]; then
+			rm -rf /Applications/Cydia.app/zh-Hant.lprojbk
+		fi
+		
+
+	else
+		echo 'nothing done'
+	fi
+
+
+	declare -a cydia
+	cydia=($CYDIA)
+	if [[ ${CYDIA+@} ]]; then
+		if [[ ${cydia[1]} -lt 1 ]]; then
+			echo 'PLEASE RESTART CYDIA!'
+		else
+			eval "echo 'finish:restart' >&${cydia[0]}"
+		fi
+	fi
+	exit 0
+
+fi
